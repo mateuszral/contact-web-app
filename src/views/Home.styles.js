@@ -5,6 +5,21 @@ import Paragraph from 'components/atoms/Paragraph/Paragraph';
 export const ContentWrapper = styled.div`
   padding: 0 ${({ theme }) => theme.layout.mobileSidesPadding};
 
+  & > div,
+  & > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    ${Paragraph} {
+      text-align: center;
+    }
+  }
+
+  & > form {
+    align-items: stretch;
+  }
+
   ${({ theme }) => theme.mq.bigTablet} {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -12,22 +27,15 @@ export const ContentWrapper = styled.div`
     & > div,
     & > form {
       padding: 0 70px;
+
+      ${Paragraph} {
+        text-align: left;
+      }
     }
 
     & > div {
       justify-content: center;
     }
-  }
-
-  & > div,
-  & > form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  & > form {
-    align-items: stretch;
   }
 `;
 
@@ -47,6 +55,13 @@ export const Phone = styled.img`
   border: 1px solid ${({ theme }) => theme.primary};
   padding: 10px;
   margin-top: 20px;
+`;
+
+export const ErrorMessage = styled.p`
+  color: ${({ theme }) => theme.warning};
+  font-size: ${({ theme }) => theme.font.size.button};
+  font-weight: ${({ theme }) => theme.font.weight.bold};
+  margin-top: 5px;
 `;
 
 export const Button = styled.button`
