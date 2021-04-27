@@ -16,7 +16,8 @@ export const colors = {
   grey300: 'hsl(0, 0%, 87%)',
   grey400: 'hsl(0, 0%, 91%)',
   grey500: 'hsl(0, 0%, 97%)',
-  primary: '#FFD226',
+  primary: '#2477CB',
+  secondary: '#ECEDEC',
 };
 
 export const font = {
@@ -27,7 +28,7 @@ export const font = {
     logo: '2rem',
     infoParagraph: '1.8rem',
     paragraph: '1.6rem',
-    button: '1.3rem',
+    button: '1.4rem',
   },
   weight: {
     regular: '400',
