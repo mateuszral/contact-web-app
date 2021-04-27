@@ -20,6 +20,7 @@ export const colors = {
   secondary: '#ECEDEC',
   tertiary: '#93949A',
   quaternary: '#052257',
+  success: '#4F8A10',
   warning: '#E69090',
 };
 
