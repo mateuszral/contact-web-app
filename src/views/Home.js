@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import { FaFacebookSquare, FaInstagramSquare } from 'react-icons/fa';
+
+import Paragraph from 'components/atoms/Paragraph/Paragraph';
 
 import Header from 'components/molecules/Header/Header';
+import FormField from 'components/molecules/FormField/FormField';
 
 import phoneIcon from 'assets/images/phone.svg';
+import heroImage from 'assets/images/hero.jpg';
 
-const ContentWrapper = styled.div``;
-
-const Phone = styled.img`
-  border-radius: 50%;
-  border: 1px solid ${({ theme }) => theme.primary};
-  padding: 10px;
-`;
+import { ContentWrapper, Heading, Phone, Button, HeroWrapper, Footer } from './Home.styles';
 
 const initialFormValues = {
   email: '',
@@ -22,16 +20,17 @@ const initialFormValues = {
 const Home = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
 
-  const handleChangeInput = (e) => {
+  const handleChangeInput = ({ target }) => {
     setFormValues({
       ...formValues,
-      [e.target.name]: e.target.value,
+      [target.name]: target.value,
     });
   };
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
     console.log(formValues);
+    setFormValues(initialFormValues);
   };
 
   return (
@@ -40,47 +39,53 @@ const Home = () => {
       <ContentWrapper>
         <div>
           <Phone src={phoneIcon} alt="" />
-          <p>1-888-444-5555</p>
-          <h2>Need assistance?</h2>
-          <p>
+          <Paragraph isBold>1-888-444-5555</Paragraph>
+          <Heading>Need assistance?</Heading>
+          <Paragraph>
             For immediate assistance with your reservation, please call us. For general questions,
             you can email us. You&apos;ll recieve a response within 2 business days.
-          </p>
+          </Paragraph>
         </div>
         <form onSubmit={handleSubmitForm}>
-          <h2>Email Us</h2>
-          <label htmlFor="email">
-            EMAIL *
-            <input
-              type="email"
-              placeholder="Enter Your Email"
-              name="email"
-              id="email"
-              onChange={(e) => handleChangeInput(e)}
-            />
-          </label>
-          <label htmlFor="subject">
-            SUBJECT *
-            <input
-              type="subject"
-              placeholder="Enter Subject"
-              name="subject"
-              id="subject"
-              onChange={(e) => handleChangeInput(e)}
-            />
-          </label>
-          <label htmlFor="message">
-            COMMENT *
-            <textarea
-              placeholder="Write your comment..."
-              name="message"
-              id="message"
-              onChange={(e) => handleChangeInput(e)}
-            />
-          </label>
-          <button type="submit">SEND</button>
+          <Heading>Email Us</Heading>
+          <FormField
+            label="email"
+            placeholder="Enter Your Email"
+            onChange={handleChangeInput}
+            value={formValues.email}
+            name="email"
+            id="email"
+          />
+          <FormField
+            label="subject"
+            placeholder="Enter Subject"
+            onChange={handleChangeInput}
+            value={formValues.subject}
+            name="subject"
+            id="subject"
+          />
+          <FormField
+            label="comment"
+            placeholder="Write your comment..."
+            onChange={handleChangeInput}
+            value={formValues.message}
+            name="message"
+            id="message"
+            as="textarea"
+          />
+          <Button type="submit">SEND</Button>
         </form>
       </ContentWrapper>
+      <HeroWrapper>
+        <img src={heroImage} alt="" />
+      </HeroWrapper>
+      <Footer>
+        <button type="button">Contact Us</button>
+        <button type="button">Privacy policy</button>
+        <FaFacebookSquare size="1.5em" />
+        <FaInstagramSquare size="1.5em" />
+        <Paragraph>&copy; {new Date().getFullYear()} NextTrip. All rights reserved</Paragraph>
+      </Footer>
     </>
   );
 };
