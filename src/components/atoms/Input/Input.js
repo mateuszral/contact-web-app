@@ -5,7 +5,7 @@ const Input = styled.input`
   height: ${({ as }) => as && '150px'};
   font-size: ${({ theme }) => theme.font.size.button};
   padding: 15px 12px;
-  border: 1px solid ${({ theme }) => theme.secondary};
+  border: 1px solid ${({ theme, isError }) => (isError ? theme.warning : theme.secondary)};
   border-radius: 5px;
   resize: vertical;
   transition: box-shadow 0.15s ease;
