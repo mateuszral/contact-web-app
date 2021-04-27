@@ -18,6 +18,8 @@ export const colors = {
   grey500: 'hsl(0, 0%, 97%)',
   primary: '#2477CB',
   secondary: '#ECEDEC',
+  tertiary: '#93949A',
+  warning: '#E69090',
 };
 
 export const font = {
