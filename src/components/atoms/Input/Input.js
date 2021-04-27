@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 const Input = styled.input`
+  width: 100%;
+  height: ${({ as }) => as && '150px'};
   font-size: ${({ theme }) => theme.font.size.button};
   padding: 15px 12px;
   border: 1px solid ${({ theme }) => theme.secondary};
   border-radius: 5px;
-  resize: none;
+  resize: vertical;
   transition: box-shadow 0.15s ease;
 
   &:focus {
