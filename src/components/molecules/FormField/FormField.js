@@ -44,10 +44,12 @@ FormField.propTypes = {
   id: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   type: PropTypes.string,
+  isError: PropTypes.bool,
 };
 
 FormField.defaultProps = {
   type: 'text',
+  isError: false,
 };
 
 export default FormField;
