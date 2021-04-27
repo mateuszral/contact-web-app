@@ -19,16 +19,13 @@ export const colors = {
   primary: '#2477CB',
   secondary: '#ECEDEC',
   tertiary: '#93949A',
+  quaternary: '#052257',
   warning: '#E69090',
 };
 
 export const font = {
   size: {
-    bigHeader: '10rem',
-    header: '4.8rem',
-    articleHeader: '2.6rem',
-    logo: '2rem',
-    infoParagraph: '1.8rem',
+    heading: '3.5rem',
     paragraph: '1.6rem',
     button: '1.4rem',
   },
