@@ -57,8 +57,8 @@ export const Phone = styled.img`
   margin-top: 20px;
 `;
 
-export const ErrorMessage = styled.p`
-  color: ${({ theme }) => theme.warning};
+export const Message = styled.p`
+  color: ${({ theme, isSuccess }) => (isSuccess ? theme.success : theme.warning)};
   font-size: ${({ theme }) => theme.font.size.button};
   font-weight: ${({ theme }) => theme.font.weight.bold};
   margin-top: 5px;

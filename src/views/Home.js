@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -19,7 +20,7 @@ import {
   Button,
   HeroWrapper,
   Footer,
-  ErrorMessage,
+  Message,
 } from './Home.styles';
 
 const schema = yup.object().shape({
@@ -28,7 +29,12 @@ const schema = yup.object().shape({
   message: yup.string().required('This value is required.'),
 });
 
+const BASE_URL = 'https://jsonplaceholder.typicode.com';
+
 const Home = () => {
+  const [isErrorWithSubmitting, setIsErrorWithSubmitting] = useState(false);
+  const [isMessageSent, setIsMessageSent] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -37,7 +43,19 @@ const Home = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleSubmitForm = (data) => {
-    console.log(data);
+    axios
+      .post(`${BASE_URL}/posts`, data)
+      .then(() => {
+        setIsErrorWithSubmitting(false);
+        setIsMessageSent(true);
+        setTimeout(() => {
+          setIsMessageSent(false);
+        }, 3000);
+      })
+      .catch(() => {
+        setIsErrorWithSubmitting(true);
+      });
+
     reset();
   };
 
@@ -56,6 +74,10 @@ const Home = () => {
         </div>
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <Heading>Email Us</Heading>
+          {isErrorWithSubmitting && (
+            <Message>There is an error with submitting form. Try again later.</Message>
+          )}
+          {isMessageSent && <Message isSuccess>Your message was sent successfully.</Message>}
           <FormField
             label="email"
             placeholder="Enter Your Email"
@@ -64,7 +86,7 @@ const Home = () => {
             {...register('email')}
             isError={errors.email}
           />
-          {errors.email && <ErrorMessage>{errors.email?.message}</ErrorMessage>}
+          {errors.email && <Message>{errors.email?.message}</Message>}
           <FormField
             label="subject"
             placeholder="Enter Subject"
@@ -73,7 +95,7 @@ const Home = () => {
             {...register('subject')}
             isError={errors.subject}
           />
-          {errors.subject && <ErrorMessage>{errors.subject?.message}</ErrorMessage>}
+          <Message>{errors.subject?.message}</Message>
           <FormField
             label="comment"
             placeholder="Write your comment..."
@@ -83,7 +105,7 @@ const Home = () => {
             {...register('message')}
             isError={errors.message}
           />
-          {errors.message && <ErrorMessage>{errors.message?.message}</ErrorMessage>}
+          {errors.message && <Message>{errors.message?.message}</Message>}
           <Button type="submit">SEND</Button>
         </form>
       </ContentWrapper>
