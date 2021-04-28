@@ -111,6 +111,10 @@ export const HeroWrapper = styled.div`
   }
 `;
 
+export const Recaptcha = styled.div`
+  margin-top: 15px;
+`;
+
 export const Footer = styled.footer`
   display: flex;
   justify-content: center;

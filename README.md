@@ -7,3 +7,4 @@
 - react-hook-form with yup
 - react-icons
 - axios
+- reCAPTCHA as antibot system

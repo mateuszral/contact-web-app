@@ -19,6 +19,7 @@ import {
   Phone,
   Button,
   HeroWrapper,
+  Recaptcha,
   Footer,
   Message,
 } from './Home.styles';
@@ -106,6 +107,7 @@ const Home = () => {
             isError={errors.message}
           />
           {errors.message && <Message>{errors.message?.message}</Message>}
+          <Recaptcha className="g-recaptcha" data-sitekey={process.env.REACT_APP_RECAPTCHA_KEY} />
           <Button type="submit">SEND</Button>
         </form>
       </ContentWrapper>
