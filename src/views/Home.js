@@ -112,7 +112,11 @@ const Home = () => {
             isError={errors.message}
           />
           <Message>{errors.message?.message}</Message>
-          <Recaptcha ref={recaptchaRef} sitekey={process.env.REACT_APP_KEY} size="normal" />
+          <Recaptcha
+            ref={recaptchaRef}
+            sitekey={process.env.REACT_APP_RECAPTCHA_KEY}
+            size="normal"
+          />
           <Button type="submit">SEND</Button>
         </form>
       </ContentWrapper>
