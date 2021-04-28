@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -36,6 +36,8 @@ const Home = () => {
   const [isErrorWithSubmitting, setIsErrorWithSubmitting] = useState(false);
   const [isMessageSent, setIsMessageSent] = useState(false);
 
+  const recaptchaRef = useRef(null);
+
   const {
     register,
     handleSubmit,
@@ -44,20 +46,24 @@ const Home = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const handleSubmitForm = (data) => {
-    axios
-      .post(`${BASE_URL}/posts`, data)
-      .then(() => {
-        setIsErrorWithSubmitting(false);
-        setIsMessageSent(true);
-        setTimeout(() => {
-          setIsMessageSent(false);
-        }, 3000);
-      })
-      .catch(() => {
-        setIsErrorWithSubmitting(true);
-      });
+    const recaptchaValue = recaptchaRef.current.getValue();
+    if (recaptchaValue) {
+      axios
+        .post(`${BASE_URL}/posts`, data)
+        .then((d) => {
+          console.log(d);
+          setIsErrorWithSubmitting(false);
+          setIsMessageSent(true);
+          setTimeout(() => {
+            setIsMessageSent(false);
+          }, 3000);
+        })
+        .catch(() => {
+          setIsErrorWithSubmitting(true);
+        });
 
-    reset();
+      reset();
+    }
   };
 
   return (
@@ -87,7 +93,7 @@ const Home = () => {
             {...register('email')}
             isError={errors.email}
           />
-          {errors.email && <Message>{errors.email?.message}</Message>}
+          <Message>{errors.email?.message}</Message>
           <FormField
             label="subject"
             placeholder="Enter Subject"
@@ -106,8 +112,8 @@ const Home = () => {
             {...register('message')}
             isError={errors.message}
           />
-          {errors.message && <Message>{errors.message?.message}</Message>}
-          <Recaptcha className="g-recaptcha" data-sitekey={process.env.REACT_APP_RECAPTCHA_KEY} />
+          <Message>{errors.message?.message}</Message>
+          <Recaptcha ref={recaptchaRef} sitekey={process.env.REACT_APP_KEY} size="normal" />
           <Button type="submit">SEND</Button>
         </form>
       </ContentWrapper>
