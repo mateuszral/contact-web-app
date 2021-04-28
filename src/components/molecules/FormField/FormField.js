@@ -44,7 +44,13 @@ FormField.propTypes = {
   id: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
   type: PropTypes.string,
-  isError: PropTypes.bool,
+  isError: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      message: PropTypes.string,
+      type: PropTypes.string,
+    }),
+  ]),
 };
 
 FormField.defaultProps = {

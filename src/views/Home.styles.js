@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 import Paragraph from 'components/atoms/Paragraph/Paragraph';
 
@@ -111,7 +112,7 @@ export const HeroWrapper = styled.div`
   }
 `;
 
-export const Recaptcha = styled.div`
+export const Recaptcha = styled(ReCAPTCHA)`
   margin-top: 15px;
 `;
 
